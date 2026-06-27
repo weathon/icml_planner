@@ -22,7 +22,8 @@ def render_markdown(papers, title, description=None):
         if p.get("room_name"):
             lines.append(f"- **Room**: {p['room_name']}\n")
         if p.get("paper_url"):
-            lines.append(f"- **Paper**: {p['paper_url']}\n")
+            pdf_url = p['paper_url'].replace("openreview.net/forum", "openreview.net/pdf")
+            lines.append(f"- **Paper**: {pdf_url}\n")
         if p.get("abstract"):
             lines.append(f"- **Abstract**: {p['abstract'][:300]}...\n")
         if p.get("reason"):
@@ -48,7 +49,7 @@ def render_ics(papers):
         if p.get("abstract"):
             desc += f"\n\n{p['abstract'][:500]}"
         if p.get("paper_url"):
-            desc += f"\n\n{p['paper_url']}"
+            desc += f"\n\n{p['paper_url'].replace('openreview.net/forum', 'openreview.net/pdf')}"
         desc += f"\nType: {p['event_type']} | Decision: {p['decision']}"
         ev.add("description", desc)
         if p.get("room_name"):
